@@ -19,7 +19,7 @@ func TestEncryptor_EncryptString(t *testing.T) {
 func TestEncryptor_DecryptString(t *testing.T) {
 
 	enc := NewEncryptor("watafak")
-	r, err := enc.DecryptString("2/pM+KtolFCdNcm6k63MOU4hdGSaRdar1TO5x9m6+pXX/g==")
+	r, err := enc.DecryptString("9L66a87ZNOSqTdSDFHov/l69ikr7mDOqoiJojn8NTvz4gw==")
 	if err != nil {
 		t.Error(err)
 	}

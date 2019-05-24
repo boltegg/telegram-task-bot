@@ -3,10 +3,9 @@ package main
 import (
 	"crypto/aes"
 	"crypto/cipher"
-	"crypto/md5"
 	"crypto/rand"
+	"crypto/sha256"
 	"encoding/base64"
-	"encoding/hex"
 	"io"
 )
 
@@ -16,11 +15,8 @@ type Encryptor struct {
 
 func NewEncryptor(passphrase string) *Encryptor {
 
-	hasher := md5.New()
-	hasher.Write([]byte(passphrase))
-	key := hex.EncodeToString(hasher.Sum(nil))
-
-	return &Encryptor{key: []byte(key)}
+	key := sha256.Sum256([]byte(passphrase))
+	return &Encryptor{key: []byte(key[:])}
 }
 
 func (e *Encryptor) EncryptString(src string) (string, error) {
