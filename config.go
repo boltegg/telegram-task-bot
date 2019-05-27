@@ -12,6 +12,7 @@ const (
 
 type Config struct {
 	TelegramBotApiKey string `yaml:"telegram_bot_api_key"`
+	MongoDbAddr       string `yaml:"mongo_db_addr"`
 }
 
 var config Config

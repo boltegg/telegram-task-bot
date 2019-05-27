@@ -1,14 +1,22 @@
 package main
 
-import "time"
+import (
+	"github.com/sirupsen/logrus"
+	"os"
+)
+
+var e *Encryptor
+var mongo Mongo
 
 func main() {
 
 	InitConfig()
+	mongo = NewMongo()
 
-	go ProcessTelegramBot()
+	e = NewEncryptor(os.Getenv("PASSPHRASE"), func(e error) { logrus.Errorf("Encryptor error: %s", e.Error()) })
 
+	ProcessTelegramBot()
 
 	// temp
-	time.Sleep(time.Hour)
+	//time.Sleep(time.Hour)
 }

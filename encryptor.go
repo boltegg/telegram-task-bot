@@ -10,35 +10,39 @@ import (
 )
 
 type Encryptor struct {
-	key []byte
+	key          []byte
+	errorHandler func(error)
 }
 
-func NewEncryptor(passphrase string) *Encryptor {
+func NewEncryptor(passphrase string, errorHandler func(error)) *Encryptor {
 
 	key := sha256.Sum256([]byte(passphrase))
-	return &Encryptor{key: []byte(key[:])}
+	return &Encryptor{key: []byte(key[:]), errorHandler: errorHandler}
 }
 
-func (e *Encryptor) EncryptString(src string) (string, error) {
+func (e *Encryptor) EncryptString(src string) string {
 	enc, err := e.encrypt([]byte(src))
 	if err != nil {
-		return "", err
+		e.errorHandler(err)
+		return ""
 	}
-	return base64.StdEncoding.EncodeToString(enc), nil
+	return base64.StdEncoding.EncodeToString(enc)
 }
 
-func (e *Encryptor) DecryptString(src string) (string, error) {
+func (e *Encryptor) DecryptString(src string) string {
 	b, err := base64.StdEncoding.DecodeString(src)
 	if err != nil {
-		return "", err
+		e.errorHandler(err)
+		return ""
 	}
 
 	dec, err := e.decrypt(b)
 	if err != nil {
-		return "", err
+		e.errorHandler(err)
+		return ""
 	}
 
-	return string(dec), nil
+	return string(dec)
 }
 
 func (e *Encryptor) encrypt(data []byte) ([]byte, error) {

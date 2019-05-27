@@ -1,1 +1,2 @@
 telegram_bot_api_key: TELEGRAM_API_KEY_PUT_HERE
+mongo_db_addr: localhost
