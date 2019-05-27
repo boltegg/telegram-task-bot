@@ -7,17 +7,17 @@ import (
 )
 
 type Task struct {
-	ID          string `bson:"_id"`
-	TaskID      int64
-	Author      int64
-	Assigned    int64
-	OpenTime    time.Time
-	DueTime     time.Time
-	CloseTime   time.Time
-	Subject     string
-	Description string
-	Status      string
-	Project     string
+	ID          string    `bson:"_id"`
+	TaskID      int64     `bson:"task_id"`
+	Author      int64     `bson:"author"`
+	Assigned    int64     `bson:"assigned"`
+	OpenTime    time.Time `bson:"open_time"`
+	DueTime     time.Time `bson:"due_time"`
+	CloseTime   time.Time `bson:"close_time"`
+	Subject     string    `bson:"subject"`
+	Description string    `bson:"description"`
+	Status      string    `bson:"status"`
+	Project     string    `bson:"project"`
 }
 
 func NewTask(author int64, assigned int64, subject string) *Task {

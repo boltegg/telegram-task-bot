@@ -44,7 +44,7 @@ func NewTelegram() *Telegram {
 
 func (t *Telegram) CallbackHandler(c *tgbotapi.CallbackQuery) {
 
-	logrus.Infof("[%d] %s", c.Message.Chat.ID, c.Data)
+	//logrus.Infof("[%d] %s", c.Message.Chat.ID, c.Data)
 
 	cmd := strings.Split(c.Data, " ")
 
@@ -113,7 +113,7 @@ func (t *Telegram) MessageHandler(update *tgbotapi.Update) {
 
 	var m = update.Message
 
-	logrus.Infof("[%d] %s", m.Chat.ID, m.Text)
+	//logrus.Infof("[%d] %s", m.Chat.ID, m.Text)
 
 	if !m.IsCommand() {
 		// create task
